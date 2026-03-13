@@ -1,5 +1,6 @@
 
 using System.Collections;
+using TMPro;
 using UnityEngine;
 
 public class KillSimulationSystem : MonoBehaviour
@@ -7,6 +8,7 @@ public class KillSimulationSystem : MonoBehaviour
     PlayerManager playerManager;
     ScoreSystem scoreSystem;
 
+    public TextMeshProUGUI infoTxt;
     void Start()
     {
         playerManager = MatchController.Instance.playerManager;
@@ -32,7 +34,7 @@ public class KillSimulationSystem : MonoBehaviour
             victim.IsAlive = false;
 
             scoreSystem.RegisterKill(killer);
-
+            infoTxt.text = $"Player {victim.Id} killed by Player {killer.Id}";
             GameEvents.OnPlayerKilled?.Invoke(killer, victim);
 
             victim.IsAlive = false;

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class PlayerManager
@@ -27,6 +28,9 @@ public class PlayerManager
             );
 
             GameObject obj = GameObject.Instantiate(playerPrefab, randomPos, Quaternion.identity, parent);
+            // SET PLAYER NUMBER
+            TextMeshPro text = obj.GetComponentInChildren<TextMeshPro>();
+            text.text = "Player " + (i + 1);
 
             PlayerModel player = new PlayerModel(i);
             player.View = obj;
