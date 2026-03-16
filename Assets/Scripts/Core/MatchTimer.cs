@@ -1,18 +1,24 @@
 
+using System.Collections;
 using UnityEngine;
 
 public class MatchTimer : MonoBehaviour
 {
     public float matchTime = 180f;
 
-    void Update()
+    void OnEnable()
     {
-        matchTime -= Time.deltaTime;
+        StartCoroutine(StartTimer());
+    }
 
-        if (matchTime <= 0)
+    IEnumerator StartTimer()
+    {
+        while (matchTime > 0)
         {
-            GameEvents.OnMatchEnd?.Invoke();
-            enabled = false;
+            yield return new WaitForSeconds(1f);
+            matchTime -= 1f;
         }
+
+        GameEvents.OnMatchEnd?.Invoke();
     }
 }
